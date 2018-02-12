@@ -8,6 +8,7 @@ export class HungryBear {
   setHunger() {
     setInterval(() => {
       this.foodLevel--;
+      // console.log(this.foodLevel);
     }, 1000);
   }
 }
