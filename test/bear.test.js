@@ -1,15 +1,17 @@
-import {HungryBear} from './../src/bear.js';
+import {bear} from './../src/bear.js';
 import * as sinon from 'sinon';
 const assert = require('assert');
 // const babel = require ('babel-core');
 const expect = require('chai').expect
 
 describe('Bear', function() {
-  let fuzzy = new HungryBear("Fuzzy");
+  let fuzzy = bear;
   var clock;
 
   beforeEach(function(){
     clock = sinon.useFakeTimers();
+    fuzzy.foodLevel = 10;
+    fuzzy.name = "Fuzzy";
     fuzzy.setHunger();
   });
   afterEach(function () {
@@ -37,11 +39,17 @@ describe('Bear', function() {
     expect(fuzzy.didYouGetEaten()).to.equal(true);
   });
 
-  it('should have a food level of ten if it is fed', function() {
-    clock.tick(9001);
-    fuzzy.feed();
-    expect(fuzzy.foodLevel).to.equal(10);
+  it("should return that the bear ate blueberries and the food level went up by 5", function() {
+    expect(fuzzy.eatSmall("blueberries")).to.equal("The bear ate the blueberries! Food level goes up 5!");
+    expect(fuzzy.foodLevel).to.equal(15);
   });
+
+  // it('should have a food level of ten if it is fed', function() {
+  //   clock.tick(9001);
+  //   fuzzy.feed();
+  //   expect(fuzzy.foodLevel).to.equal(10);
+  // });
+
   // describe('', function(){
   //   it('should do the thing', function(){
   //     assert();
